@@ -1,13 +1,10 @@
 from flask import Flask
-from flask_restx import Resource, Api
+
+from routes import api
 
 app = Flask(__name__)
-api = Api(app)
-
-@api.route('/hello')
-class HelloWorld(Resource):
-  def get(self):
-    return {'hello': 'world'}
+# api = Api(app) # Api() replaced by ./routes/__init__.py
+api.init_app(app)
 
 if __name__ == '__main__':
   app.run(debug=True)
