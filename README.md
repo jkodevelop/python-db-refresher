@@ -1,4 +1,4 @@
-# Flask-RESTX python startrer  [2021]
+# Flask-RESTX python starter [2021]
 This repo is a simple starter for **Flask** developement, this provides a simple RESTful-API server.
 **RESTX** part is the framework on top of **Flask** to provide swagger auto API documentation.
 
