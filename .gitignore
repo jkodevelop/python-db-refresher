@@ -1,2 +1,4 @@
 /env
 /routes/__pycache__
+/uploads/*
+!/uploads/sampleUpload.txt
