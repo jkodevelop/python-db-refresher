@@ -9,5 +9,5 @@ api = Api(
     description='a simple start for Flask RESTX development'
 )
 
-api.add_namespace(basic_api, path="/api/basic")
-api.add_namespace(fileio_api, path="/api/fileio")
+api.add_namespace(basic_api, path='/api/basic')
+api.add_namespace(fileio_api, path='/api/fileio')
