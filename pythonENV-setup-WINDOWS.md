@@ -30,21 +30,27 @@ Once activated the python module being installed will be tide to this project an
 ```bash
 deactivate
 ````
+#### troubleshooting
+###### 1 - problems with virtual environment and packages
+After activating virtual environment, if running `deactivate` doesn't work. Should check if there is something wrong with the environment. Easiest way to check is if running `pip3 freeze > requirements.txt` and see a lot of unknown or unused python packages. There might be virtual environment corruption
+*solution 1*: delete the virtual environment `env` and reinstate it `py -m venv env`
+*solution 2*: check python system path, make sure the OS is running python3. Sometimes the system might have multiple version of python running. pip module gets kind of confused
 
 ### pip
 pip used to manage and install python libraries. Helpful commands. Assumes package list name to be `requirements.txt` for example commands below
 
-list out all packages under this project
+
+Once **venv** is activated list out all packages under this project
 ```bash
-py -m pip freeze
+pip3 freeze
 ```
 
 save package dependency list into a file: `requirements.txt`
 ```bash
-python -m pip freeze > requirements.txt
+pip3 freeze > requirements.txt
 ```
 
 install packages in file: `requirements.txt`
 ```bash
-py -m pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```

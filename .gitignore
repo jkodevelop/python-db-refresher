@@ -2,3 +2,5 @@
 /routes/__pycache__
 /uploads/*
 !/uploads/sampleUpload.txt
+/decorators/__pycache__
+/util/__pycache__
