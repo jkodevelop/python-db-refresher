@@ -1,8 +1,7 @@
 from flask_restx import Api
 
-from .basic import api as basic_api
-from .fileio import api as fileio_api
 from .auth import api as auth_api
+from .users import api as users_api
 
 api = Api(
     title='Sample Flask RESTX starter',
@@ -10,6 +9,5 @@ api = Api(
     description='a simple start for Flask RESTX development'
 )
 
-api.add_namespace(basic_api, path='/api/basic')
-api.add_namespace(fileio_api, path='/api/fileio')
 api.add_namespace(auth_api, path='/api/auth')
+api.add_namespace(users_api, path='/api/users')
