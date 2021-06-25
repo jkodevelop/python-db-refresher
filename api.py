@@ -5,6 +5,10 @@ from routes import api
 
 app = Flask(__name__)
 
+# db config
+app.config['MONGO_DBNAME'] = 'zzz'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/'
+
 # limits max file upload size to 16 MB
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
 

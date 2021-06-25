@@ -10,7 +10,9 @@ Jinja2==2.11.3
 jsonschema==3.2.0
 MarkupSafe==2.0.1
 PyJWT==2.1.0
+pymongo==3.11.4
 pyrsistent==0.17.3
+python-bsonjs==0.2.0
 pytz==2021.1
 six==1.16.0
 typing-extensions==3.10.0.0
