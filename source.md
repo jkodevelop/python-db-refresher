@@ -1,20 +1,12 @@
-# python 3
-### print function
-https://realpython.com/python-print/
+# mysql - pymysql
+https://pypi.org/project/PyMySQL/
+https://pymysql.readthedocs.io/en/latest/index.html
 
-### package namespace and __init__
-https://stackoverflow.com/questions/37139786/is-init-py-not-required-for-packages-in-python-3-3
+### guides 
+https://www.tutorialspoint.com/python3/python_database_access.htm
 
-### python styleguide PEP8
-https://realpython.com/python-pep8/
+### examples
+https://pymysql.readthedocs.io/en/latest/user/examples.html
 
-### jwt
-https://flask-restx.readthedocs.io/en/latest/swagger.html
-https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage/
-https://pythonhosted.org/Flask-JWT/
-
-### auth
-https://blog.teclado.com/protecting-endpoints-in-flask-apps-by-requiring-login/
-
-### python decorator
-https://realpython.com/primer-on-python-decorators/
+### benchmarks
+https://www.programmersought.com/article/4675925085/
