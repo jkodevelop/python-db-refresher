@@ -1,3 +1,5 @@
+from util.config import config
+
 from flask import Flask
 from flask_jwt_extended import JWTManager
 
@@ -5,11 +7,14 @@ from routes import api
 
 app = Flask(__name__)
 
-# limits max file upload size to 16 MB
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
+# limits max file upload size
+app.config['MAX_CONTENT_LENGTH'] = config['FLASK.default']['MAX_CONTENT_LENGTH']
+# print(f'::{app.config["MAX_CONTENT_LENGTH"]}::')
 
 # Setup the Flask-JWT-Extended extension
-app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this!
+app.config['JWT_SECRET_KEY'] = config['FLASK.default']['JWT_SECRET_KEY']
+# print(f'::{app.config["JWT_SECRET_KEY"]}::')
+
 jwt = JWTManager(app)
 
 # api = Api(app) # Api() replaced by ./routes/__init__.py

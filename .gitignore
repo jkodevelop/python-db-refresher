@@ -4,3 +4,4 @@
 !/uploads/sampleUpload.txt
 /decorators/__pycache__
 /util/__pycache__
+/config.ini

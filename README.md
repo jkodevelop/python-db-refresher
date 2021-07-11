@@ -19,3 +19,5 @@ guide for setting up venv is included in `./pythonENV-setup-%OS%.md`
 
 2. `py api.py` then go to http://127.0.0.1:5000/ to see the swagger UI with routes definition and usage.
 note: depending on environment and name of python installed, the command `py` could be `python` instead. 
+
+3. rename `SAMPLEconfig.ini` to `config.ini` and change the settings based on environment
