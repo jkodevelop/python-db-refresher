@@ -21,3 +21,7 @@ guide for setting up venv is included in `./pythonENV-setup-%OS%.md`
 note: depending on environment and name of python installed, the command `py` could be `python` instead. 
 
 3. rename `SAMPLEconfig.ini` to `config.ini` and change the settings based on environment
+
+### db example:
+
+import `_dbexport/mysqlexport.sql` to a test database as reference

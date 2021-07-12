@@ -2,6 +2,8 @@ from flask_restx import Namespace, Resource, fields
 from flask import Flask, request
 import pymysql
 
+from util.config import config
+
 api = Namespace('users', description='Users management')
 
 @api.route('/latest', doc={ 
@@ -9,13 +11,13 @@ api = Namespace('users', description='Users management')
 })
 class Latest(Resource):
   def get(self):
-    db = pymysql.connect(host='localhost',
-                        user='zzz',
-                        password='sapassword',
-                        database='zzz',
+    db = pymysql.connect(host=config['mysql']['DB_HOST'],
+                        user=config['mysql']['DB_USER'],
+                        password=config['mysql']['DB_PASS'],
+                        database=config['mysql']['DB_DBNAME'],
                         cursorclass=pymysql.cursors.DictCursor)
     cursor = db.cursor()
-    sql = 'SELECT `id`,`email`,`first_name`,`last_name` FROM `users` ORDER BY `id` DESC'
+    sql = 'SELECT `id`,`email`,`firstname`,`lastname` FROM `users` ORDER BY `id` DESC'
     cursor.execute(sql)
     data = cursor.fetchone()
     print ('db result: %s ' % data)
@@ -28,13 +30,13 @@ class Latest(Resource):
 @api.doc(params={'id': 'An ID'})
 class GetById(Resource):
   def get(self, id):
-    db = pymysql.connect(host='localhost',
-                        user='zzz',
-                        password='sapassword',
-                        database='zzz',
+    db = pymysql.connect(host=config['mysql']['DB_HOST'],
+                        user=config['mysql']['DB_USER'],
+                        password=config['mysql']['DB_PASS'],
+                        database=config['mysql']['DB_DBNAME'],
                         cursorclass=pymysql.cursors.DictCursor)
     cursor = db.cursor()
-    sql = 'SELECT `id`,`email`,`first_name`,`last_name` FROM `users` WHERE `id`=%s'
+    sql = 'SELECT `id`,`email`,`firstname`,`lastname` FROM `users` WHERE `id`=%s'
     cursor.execute(sql,(id,))
     data = cursor.fetchone()
     print ('db result: %s ' % data)
