@@ -9,6 +9,7 @@ https://pypi.org/project/neo4j/
 https://towardsdatascience.com/neo4j-cypher-python-7a919a372be7
 https://towardsdatascience.com/create-a-graph-database-in-neo4j-using-python-4172d40f89c4
 https://neo4j.com/developer/python-movie-app/
+https://pythontic.com/database/neo4j/create%20nodes%20and%20relationships
 
 ### cypher tutorials:
 https://neo4j.com/blog/neo4j-video-tutorials/
