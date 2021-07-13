@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from flask import Flask, request
-import pymysql
+import mysql.connector
 
 from util.config import config
 
@@ -11,12 +11,11 @@ api = Namespace('db', description='Check db status')
 })
 class Status(Resource):
   def get(self):
-    db = pymysql.connect(host=config['mysql']['DB_HOST'],
+    db = mysql.connector.connect(host=config['mysql']['DB_HOST'],
                         user=config['mysql']['DB_USER'],
                         password=config['mysql']['DB_PASS'],
-                        database=config['mysql']['DB_DBNAME'],
-                        cursorclass=pymysql.cursors.DictCursor)
-    cursor = db.cursor()
+                        database=config['mysql']['DB_DBNAME'])
+    cursor = db.cursor(dictionary=True)
     sql = 'SELECT VERSION()'
     cursor.execute(sql)
     data = cursor.fetchone()
