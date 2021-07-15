@@ -6,6 +6,13 @@ from util.config import config
 
 api = Namespace('users', description='Users management')
 
+user_obj =  api.model('user_obj', {
+  'email': fields.String(default='some text',description='text'),
+  'firstname': fields.String(default='some text',description='text'),
+  'lastname': fields.String(default='some text',description='text'),
+  'active': fields.Boolean(required=True,default=True,description='active: true or false'),
+})
+
 @api.route('/latest', doc={ 
   'description': 'get latest user'
 })
@@ -126,3 +133,90 @@ class ProcedureWithInput(Resource):
     db.commit() # this is required for all procedure that changes database values
     db.close()
     return { 'status':'success' }
+
+@api.route('/create', doc={ 
+  'description': 'insert example'
+})
+class CreateUser(Resource):
+  @api.expect(user_obj, validate=True)
+  def post(self):
+    post_param = request.get_json()
+    db = mysql.connector.connect(host=config['mysql']['DB_HOST'],
+                        user=config['mysql']['DB_USER'],
+                        password=config['mysql']['DB_PASS'],
+                        database=config['mysql']['DB_DBNAME'])
+
+    db.autocommit = True # this sets will allow not be call .commit() after execute
+    cursor = db.cursor()
+
+    sql = 'INSERT INTO `users` (`email`,`firstname`,`lastname`,`active`) VALUES (%s,%s,%s,%s)'
+    val = (post_param['email'],post_param['firstname'],post_param['lastname'],post_param['active'])
+    # val = [ ('val1',...),('val2',...) ] # insert multiple format
+    cursor.execute(sql,val)
+
+    # print(cursor.fetchone());
+    row_count = cursor.rowcount;
+
+    # db.commit() # db.autocommit = True - so no need to call this explicitly
+    db.close()
+
+    return {
+      'status': 'success',
+      'res': row_count
+    }
+    api.abort(404, 'invalid: could not complete api call')
+
+@api.route('/delete/<int:id>', doc={ 
+  'description': 'delete example'
+})
+class DeleteUser(Resource):
+  def delete(self, id):
+    db = mysql.connector.connect(host=config['mysql']['DB_HOST'],
+                        user=config['mysql']['DB_USER'],
+                        password=config['mysql']['DB_PASS'],
+                        database=config['mysql']['DB_DBNAME'])
+    cursor = db.cursor()
+    sql = 'DELETE FROM `users` WHERE `id`=%s'
+    val = (id,)
+    try:
+      cursor.execute(sql,val)
+      db.commit()
+    except:
+      db.rollback()
+    db.close()
+    return {
+      'status': 'success',
+      'res': id
+    }
+    api.abort(404, 'invalid: could not complete api call')
+
+@api.route('/update/<int:id>', doc={ 
+  'description': 'update example'
+})
+class UpdateUser(Resource):
+  @api.expect(user_obj, validate=True)
+  def put(self, id):
+    post_param = request.get_json()
+    db = mysql.connector.connect(host=config['mysql']['DB_HOST'],
+                        user=config['mysql']['DB_USER'],
+                        password=config['mysql']['DB_PASS'],
+                        database=config['mysql']['DB_DBNAME'])
+
+    db.autocommit = True # this sets will allow not be call .commit() after execute
+    cursor = db.cursor()
+
+    sql = 'UPDATE `users` SET `email`=%s,`firstname`=%s,`lastname`=%s,`active`=%s WHERE `id`=%s'
+    val = (post_param['email'],post_param['firstname'],post_param['lastname'],post_param['active'], id)
+    # val = [ ('val1',...),('val2',...) ] # insert multiple format
+    cursor.execute(sql,val)
+
+    row_count = cursor.rowcount;
+
+    # db.commit() # db.autocommit = True - so no need to call this explicitly
+    db.close()
+
+    return {
+      'status': 'success',
+      'res': row_count
+    }
+    api.abort(404, 'invalid: could not complete api call')

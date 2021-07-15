@@ -10,14 +10,14 @@ api = Namespace('authentication',
   description='example of authentication and protecting paths', 
   authorizations=api_key)
 
-user = api.model('user', {
+auth_user = api.model('auth_user', {
   'email': fields.String(required=True, default='email@email.com', description='login email'),
   'password': fields.String(required=True, default='****', description='login password')
 })
   
 @api.route('/login')
 class Login(Resource):
-  @api.expect(user, validate=True)
+  @api.expect(auth_user, validate=True)
   def post(self):
     if not request.is_json:
       resp = jsonify({'err_msg': 'Missing JSON in request'})
